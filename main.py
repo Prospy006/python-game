@@ -1,13 +1,16 @@
 import time
 
 
-#FUNCTIONS
+#VARIABLES
 
 sPATTACK = 0        #Amount of sP applied in ATK
 spDEFENCE = 0       #Amount of sP applied in DEF
 sPSPEED = 0         #Amount of sP applied in SPD
 sPINTELLIGENCE = 0  #Amount of sP applied in INT
 sPHP = 0            #Amount of sP applied in HP
+playMode = "x"
+
+#FUNCTIONS
 
 def sPASSIGNMENT():
     global sPATTACK
@@ -56,6 +59,43 @@ def slowText(text):
         print(char, end='', flush=True)
         time.sleep(sleepTime)
 
+#def singlePlayerSaveFile():
+#    global savefileInput
+#    savefileInput = input(print("Hello, user! Do you have a savefile you would like to load? (Y/N): "))
+#    if savefileInput == "Y":
+#        savefilePath = input(print("Type out the path in which you have your save-file: "))
+#        savefile = open(savefilePath, "rt")
+#        print(savefile)
+#    elif savefileInput == "N":
+#        savefileName = input(print("We will be creating one for you. Name your save: "))
+#        savefile = open(savefileName, "x")
+#        print(savefile)
+
+def menu():
+    global sleepTime
+    global playMode
+    global savefileInput
+    global savefileName
+    global savefile
+    sleepTime = 0.05
+    slowText("Hello user, to the game!\n")
+    slowText("What mode would you like to play today?\n")
+    playMode = input("Lonely... I'm so lonely... (singleplayer)         Friends! (multiplayer)\n")
+    if playMode == "singleplayer":
+        savefileInput = input("Great, loner! Do you have a savefile? (Y/N): ")
+        if savefileInput == "Y":
+            savefilePath = input("Type out the path in which you have your save-file: ")
+            savefile = open(savefilePath, "rt")
+            print(savefile)
+        else:
+            savefileName = input("We will be creating one for you. Name your save: ")
+            savefile = open(savefileName, "x")
+            print(savefile)
+    elif playMode == "multiplayer":
+        slowText("On BETA phase. Please try again after the next update. Thank you!")
+        menu()
+    else:
+        slowText("Wrong input? We will take you to the menu. Please don't do it again.")
 #FUNCTIONS END
 
 
@@ -81,19 +121,10 @@ ClassData = [
 #ClassData[0][5] += x
 #TESTEND
 sleepTime = 0.1
-slowText("Loading.....................\n")
+slowText("Loading..............\n")
 slowText("Patching up resources.......\n")
-slowText("Clearing cache..............\n")
-sleepTime = 0.05
-savefileInput = input(print("Hello, user! Do you have a savefile you would like to load? (Y/N): "))
-if savefileInput == "Y":
-    savefilePath = input(print("Type out the path in which you have your save-file: "))
-    savefile = open(savefilePath, "rt")
-    print(savefile)
-elif savefileInput == "N":
-    savefileName = input(print("We will be creating one for you. Name your save: "))
-    savefile = open(savefileName, "x")
-    print(savefile)
+slowText("Clearing cache...........\n")
+menu()
 #TEST
 #i = 0
 #for i in range(len(ClassData)):
